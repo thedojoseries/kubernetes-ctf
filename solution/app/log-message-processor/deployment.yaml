@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: log-message-processor
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: log-message-processor
+      redis-access: "true"
+  template:
+    metadata:
+      labels:
+        app: log-message-processor
+        redis-access: "true"
+    spec:
+      containers:
+      - image: 561341012850.dkr.ecr.us-east-1.amazonaws.com/team62-log-message-processor
+        name: log-message-processor
+        env:
+        - name: REDIS_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: log-message-processor
+              key: REDIS_HOST
+        - name: REDIS_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: log-message-processor
+              key: REDIS_PORT
+        - name: REDIS_CHANNEL
+          valueFrom:
+            configMapKeyRef:
+              name: log-message-processor
+              key: REDIS_CHANNEL
+      restartPolicy: Always

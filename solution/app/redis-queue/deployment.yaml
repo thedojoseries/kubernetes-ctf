@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-queue
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis-queue
+  template:
+    metadata:
+      labels:
+        app: redis-queue
+    spec:
+      containers:
+      - name: redis-queue
+        image: redis
+        ports:
+        - containerPort: 6379
+          name: redisport
+        # volumeMounts:
+        # - mountPath: /data
+        #   name: pv-for-redis
+        # livenessProbe:
+        #   tcpSocket:
+        #     port: redisport
+        #   failureThreshold: 3
+        #   initialDelaySeconds: 30
+        #   periodSeconds: 15
+        #   successThreshold: 1
+        #   timeoutSeconds: 2
+        # readinessProbe:
+        #   tcpSocket:
+        #     port: redisport
+        #   failureThreshold: 3
+        #   initialDelaySeconds: 1
+        #   periodSeconds: 15
+        #   successThreshold: 1
+        #   timeoutSeconds: 2
+      restartPolicy: Always
+      # volumes:
+      # - name: pv-for-redis
+      #   persistentVolumeClaim:
+      #     claimName: pv-claim

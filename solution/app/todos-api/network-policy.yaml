@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: todos-api
+spec:
+  podSelector:
+    matchLabels:
+      app: todos-api
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: frontend
+    ports:
+    - protocol: TCP
+      port: 8082
+  egress:
+  - to:
+    - podSelector:
+        matchLabels:
+          app: redis-queue
+    ports:
+    - protocol: TCP
+      port: 6379

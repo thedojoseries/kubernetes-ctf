@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: frontend
+data:
+  AUTH_API_ADDRESS: http://auth-api:8081
+  PORT: "8080"
+  TODOS_API_ADDRESS: http://todos-api:8082

@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: log-message-processor
+data:
+  REDIS_HOST: redis-queue
+  REDIS_PORT: "6379"
+  REDIS_CHANNEL: log_channel

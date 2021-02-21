@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: users-api
+spec:
+  podSelector:
+    matchLabels:
+      app: users-api
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: auth-api
+    ports:
+    - protocol: TCP
+      port: 8083

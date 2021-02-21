@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: todos-api
+data:
+  TODO_API_PORT: "8082"
+  REDIS_HOST: redis-queue
+  REDIS_PORT: "6379"
+  REDIS_CHANNEL: log_channel

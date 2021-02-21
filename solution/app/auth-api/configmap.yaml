@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: auth-api
+data:
+  AUTH_API_PORT: "8081"
+  USERS_API_ADDRESS: http://users-api:8083

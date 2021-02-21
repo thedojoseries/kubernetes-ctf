@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: frontend
+spec:
+  podSelector:
+    matchLabels:
+      app: frontend
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - {}
+  egress:
+  - to:
+    - podSelector:
+        matchLabels:
+          app: auth-api
+    ports:
+    - protocol: TCP
+      port: 8081
+  - to:
+    - podSelector:
+        matchLabels:
+          app: todos-api
+    ports:
+    - protocol: TCP
+      port: 8082

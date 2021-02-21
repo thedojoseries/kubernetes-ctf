@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todos-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todos-api
+      redis-access: "true"
+  template:
+    metadata:
+      labels:
+        app: todos-api
+        redis-access: "true"
+    spec:
+      containers:
+      - image: 561341012850.dkr.ecr.us-east-1.amazonaws.com/team62-todos-api
+        name: todos-api
+        ports:
+        - containerPort: 8082
+          name: tport
+        env:
+        - name: JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: todos-api
+              key: JWT_SECRET
+        - name: TODO_API_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: todos-api
+              key: TODO_API_PORT
+        - name: REDIS_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: todos-api
+              key: REDIS_HOST
+        - name: REDIS_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: todos-api
+              key: REDIS_PORT
+        - name: REDIS_CHANNEL
+          valueFrom:
+            configMapKeyRef:
+              name: todos-api
+              key: REDIS_CHANNEL
+        # livenessProbe:
+        #   httpGet:
+        #     path: /health
+        #     port: tport
+        #   failureThreshold: 3
+        #   initialDelaySeconds: 30
+        #   periodSeconds: 15
+        #   successThreshold: 1
+        #   timeoutSeconds: 2
+        # readinessProbe:
+        #   httpGet:
+        #     path: /health
+        #     port: tport
+        #   failureThreshold: 3
+        #   initialDelaySeconds: 1
+        #   periodSeconds: 15
+        #   successThreshold: 1
+        #   timeoutSeconds: 2
+      restartPolicy: Always

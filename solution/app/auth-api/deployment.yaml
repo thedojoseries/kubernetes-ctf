@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auth-api
+  template:
+    metadata:
+      labels:
+        app: auth-api
+    spec:
+      containers:
+      - image: 561341012850.dkr.ecr.us-east-1.amazonaws.com/team62-auth-api
+        name: auth-api
+        ports:
+        - containerPort: 8081
+          name: authport
+        env:
+        - name: AUTH_API_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: auth-api
+              key: AUTH_API_PORT
+        - name: JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: auth-api
+              key: JWT_SECRET
+        - name: USERS_API_ADDRESS
+          valueFrom:
+            configMapKeyRef:
+              name: auth-api
+              key: USERS_API_ADDRESS
+        # livenessProbe:
+        #   httpGet:
+        #     path: /version
+        #     port: authport
+        #   failureThreshold: 3
+        #   initialDelaySeconds: 30
+        #   periodSeconds: 15
+        #   successThreshold: 1
+        #   timeoutSeconds: 2
+        # readinessProbe:
+        #   httpGet:
+        #     path: /version
+        #     port: authport
+        #   failureThreshold: 3
+        #   initialDelaySeconds: 1
+        #   periodSeconds: 15
+        #   successThreshold: 1
+        #   timeoutSeconds: 2
+      restartPolicy: Always
