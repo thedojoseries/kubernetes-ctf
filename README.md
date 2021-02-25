@@ -176,7 +176,7 @@ Your IAM User and its password will be provided to you via your team channel on 
 
 We've set up a [Cloud9 environment](https://aws.amazon.com/cloud9/) for the teams that requested it. After you've logged in to AWS, click on **Services** at the top and type in `Cloud9`. That will take you to the Cloud9 console. You should see your team's environment (team1 has been used as example only):
 
-<img src="https://devslop-ctf-images.s3.amazonaws.com/cloud9-environments.png" alt="cloud9-env" width="900" height="300"/><br />
+![cloud9-envs](./images/cloud9-environments.png)
 
 Click on **Open IDE**.
 
@@ -186,31 +186,31 @@ You won't be able to configure the AWS CLI properly unless you disable temporary
 
 Click on the Cloud9 logo:
 
-![cloud9-logo](https://devslop-ctf-images.s3.amazonaws.com/cloud9-logo.png)
+![cloud9-logo](./images/cloud9-logo.png)
 
 Then Preferences:
 
-![cloud9-preferences](https://devslop-ctf-images.s3.amazonaws.com/cloud9-preferences.png)
+![cloud9-preferences](./images/cloud9-preferences.png)
 
 Scroll down until you find the AWS Settings:
 
-![cloud9-aws-settings](https://devslop-ctf-images.s3.amazonaws.com/cloud9-aws-settings.png)
+![cloud9-aws-settings](./images/cloud9-aws-settings.png)
 
 Then make sure it's disabled (you should see the switch go red with an X on the right-hand side):
 
-![cloud9-disable-temp-creds](https://devslop-ctf-images.s3.amazonaws.com/cloud9-disable-temp-creds.png)
+![cloud9-disable-temp-creds](./images/cloud9-disable-temp-creds.png)
 
 #### Enabling Auto-Save (optional) (Cloud9 Users Only)
 
 To configure Cloud9 to save files automatically, do the following. Click on the Cloud9 icon on the top-left corner and then on Preferences:
 
-![step-01](https://devslop-ctf-images.s3.amazonaws.com/cloud9-step-01.png)
+![step-01](./images/cloud9-step-01.png)
 
 At the bottom, click on Experimental:
-![step-02](https://devslop-ctf-images.s3.amazonaws.com/cloud9-step-02.png)
+![step-02](./images/cloud9-step-02.png)
 
 Finally, click on drop down and then on `After Delay`, which will cause files to be saved after a second or so:
-![step-03](https://devslop-ctf-images.s3.amazonaws.com/cloud9-step-03.png)
+![step-03](./images/cloud9-step-03.png)
 
 #### Installing kubectl (Cloud9 Users Only)
 
